@@ -22,6 +22,14 @@ contract ChatApp {
         string msg;
     } 
   
+  //all user struct
+  struct allUser {
+    address accountAddress;
+    string name;
+  }
+
+  AllUserStruct[] getAllUser;
+
   //MAPPINGS
     mapping(address => user) userList;
     mapping(bytes32 => message[]) allMessages;
@@ -36,7 +44,8 @@ contract ChatApp {
         require(checkUserExist(msg.sender) == false, "user already exist");
         require(bytes(name).length>0, "Username cant be empty");
 
-        userList[msg.sender].name =name
+        userList[msg.sender].name =name;
+        getAllUser.push(AllUserStruct(name, msg.sender))
     }
 
     //GET USERNAME
@@ -50,7 +59,7 @@ contract ChatApp {
         require(checkUserExist(msg.sender), "Create an account First");
         require(checkUserExist(friend_key), "User is not registered");
         require(msg.sender = friend_Key, "users cannot add themselves");
-        require(checkAlreadyFriends(msg.sender, friend_Key)== false, "These user are friends");
+        require(checkAlreadyFriends(msg.sender, friend_key)== false, "These user are friends");
 
         _addFriend(mag.sender, friend_key, name);
         _addFriend(friend_key, msg.sender, userList[msg.sender].name);
@@ -64,7 +73,7 @@ contract ChatApp {
             pubkey2 = tmp;
         }
         for(uint256 i = 0; i < userList[pubkey1].friendList.length; i++){
-            if(userList[pubkey1].friendList[i].pubkey = pubkey2)return true;
+            if(userList[pubkey1].friendList[i].pubkey == pubkey2) return true;
            
         }
          return false;
@@ -86,5 +95,27 @@ contract ChatApp {
         if(pubkey1 <pubkey2){
             return keccak256(abi.encodePacked(pubkey1, pubkey2));
         }else return keccak256(abi.encodePacked(pubkey2, pubkey1));
+    }
+
+    //SEND MESSAGE
+    function sendMessageB(address friendKey, string calldata _msg) external {
+        require(checkUserExist(msg.sender), "create ana account");
+        require(checkUserExist(friend_key), "user is not registered");
+        require(checkAlreadyFriends(msg.sender, friend_key), "You are not friend with the user");
+
+        bytes32 chatCode = _getChatCode(msg.sender, friend_key);
+        message memory newMsg = message(msg.sender, block.timestamp, _msg);
+        allMessages[chatCode].push(newMsg);
+    }
+
+    //Read message
+    function readMessage(address friend_key) external view returns(message[] memory){
+        bytes chatCode = _getChatCode(msg.sender, friend_key);
+        return allMessages[chatCode];
+    }
+
+    //GET USER
+    function getAllAppUser() public view returns(AllUserStruct[] memory){
+        return getAllUsers;
     }
 }
