@@ -120,6 +120,7 @@ export const ChatAppProvider = ({children}) => {
              createAccounts,
              addMyFriends,
              sendMessage,
+             connectWallet,
              account,
              username,
              error,
@@ -128,7 +129,8 @@ export const ChatAppProvider = ({children}) => {
              loading,
              userList,
              currentUserAddress,
-             currentUserName
+             currentUserName,
+             checkIfWalletConnected
             }
         }>
             {children}

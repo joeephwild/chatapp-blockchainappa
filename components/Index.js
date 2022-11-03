@@ -6,4 +6,4 @@ import Model from '../components/Model'
 import Navbar from '../components/Navbar'
 import UserCard from '../components/UserCard'
 
-export { Navbar, Error, Loader, Filter, Friend, Model, UserCard}
+export  { Navbar, Error, Loader, Filter, Friend, Model, UserCard}

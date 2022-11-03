@@ -29,7 +29,7 @@ export const connectWallet = async() => {
     }
 }
 
-const fetchContract = (signerorprovider) => new ethers.Contract(ChatAppABI, ChatAppAddress, signerorprovider);
+const fetchContract = (signerorprovider) => new ethers.Contract(ChatAppAddress, ChatAppABI, signerorprovider);
 
 export const connectWithContract = async() => {
     try {
