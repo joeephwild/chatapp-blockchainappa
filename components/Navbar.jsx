@@ -17,7 +17,8 @@ const style = {
   btn2: "flex items-center space-x-2 bg-white text-black px-3 py-1.5 rounded-full",
   activeBtn: 'bg-[#f18303] text-[#000000de] px-4 py-2.5 mx-auto ',
   mobileMenu: 'w-screen h-screen absolute top-0 left-0 bg-white text-black z-50',
-  mobilelinks: 'justify-center text-2xl mt-[20%] items-center flex flex-col'
+  mobilelinks: 'justify-center text-2xl mt-[20%] items-center flex flex-col',
+  right: 'md:hidden block'
 }
 
 const Navbar = () => {
@@ -43,12 +44,13 @@ const Navbar = () => {
       links: "/"
     }
   ]
-  const { account, userName, connectWallet } = useContext(ChatAppContext)
+  const { account, userName, connectWallet, createAccounts, error } = useContext(ChatAppContext)
   //state
 const [active, setActive] = useState(2);
 const [open, setOpen] = useState(false);
 const [openModel, setOpenModel] = useState()
   return (
+    <div>
     <div className={style.wrapper}>
       
         <div className={style.leftNav}>
@@ -78,27 +80,33 @@ const [openModel, setOpenModel] = useState()
           </div>
           )}
 
-         {account == "" ? (
-         <button onClick={() => connectWallet()} className={style.btn}>Connect Wallet</button>
-         ) : (
-          <button onClick={() => setOpenModel(true)} className={style.btn2}>
-            {''}
-            <Image src={userName ? images.accountName : images.create2} alt="account image" height={20} width={20} />
-            <small>{userName || "create account"}</small>
+        {account == "" ? (
+          <button onClick={() => connectWallet()} className={style.btn}>
+            <small>Connect Account</small>
           </button>
-         )}
+        ) : (
+          <button onClick={() => setOpenModel(true)} className={style.btn2}>
+            <Image src={images.accountName} alt="account" width={30} height={30} />
+            <small>{userName ? userName : "Create Account"}</small>
+          </button>
+        )}
         </div>
      <div className={style.right}
      onClick={() => setOpen(true)} >
-      <Image src={images.open} height={30} width={30} />
+      <Image src={images.open} alt='open' height={30} width={30} />
      </div>
-     {/* open model  */}
-     {openModel && (
+    
+     {error == "" ? "" : <Error errors={error} />}
+     </div>
+      {/* open model  */}
+      {openModel && (
       <div>
-        <Model openModel={setOpenModel}
-        title="Welcome to"
-        head="chst body"
-        info='lorem' />
+        <Model openBox={setOpenModel}
+        head="Create an account"
+        image={images.send}
+        address={account}
+        functionName={createAccounts}
+         />
       </div>
      )}
     </div>
