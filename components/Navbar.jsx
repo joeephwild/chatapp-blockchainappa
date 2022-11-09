@@ -86,8 +86,8 @@ const [openModel, setOpenModel] = useState()
           </button>
         ) : (
           <button onClick={() => setOpenModel(true)} className={style.btn2}>
-            <Image src={images.accountName} alt="account" width={30} height={30} />
-            <small>{userName ? userName : "Create Account"}</small>
+            <Image src={userName ? images.accountName : images.create2} alt="account" width={30} height={30} />
+             <small>{userName ? userName : "Create Account"}</small> 
           </button>
         )}
         </div>

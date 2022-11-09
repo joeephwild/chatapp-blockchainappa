@@ -9,5 +9,5 @@
 
 
 body {
-    @apply bg-[#000000de] text-[#fafafa];
+    @apply bg-[#fafafa] font-Poppins text-[#000000de];
 }
