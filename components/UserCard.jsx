@@ -5,7 +5,13 @@ import images from '../public/assets/fonts/images'
 const UserCard = ({ el, i, functionName}) => {
   return (
     <div>
-      <Image src={images[`image${i +  1}`]} alt="profile" widthj={100} height={100} />
+      <Image
+          
+          src={images[`image${i + 1}`]}
+          alt="user"
+          width={100}
+          height={100}
+        />
       <div>
       <h3>{el.name}</h3>
       <div>{el.accountAddress.slice(0,25)}...</div>

@@ -25,7 +25,7 @@ const Navbar = () => {
   const menuItems = [
     {
       menu: "All Users",
-      links: "all users"
+      links: "/allUsers"
     },
     {
       menu: "Chat",
@@ -86,7 +86,7 @@ const [openModel, setOpenModel] = useState()
           </button>
         ) : (
           <button onClick={() => setOpenModel(true)} className={style.btn2}>
-            <Image src={userName ? images.accountName : images.create2} alt="account" width={30} height={30} />
+            <Image src={userName ? images.image1 : images.create2} alt="account" width={30} height={30} />
              <small>{userName ? userName : "Create Account"}</small> 
           </button>
         )}
