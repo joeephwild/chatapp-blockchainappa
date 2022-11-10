@@ -9,5 +9,5 @@
 
 
 body {
-    @apply bg-[#fafafa] font-Poppins text-[#000000de];
+    @apply bg-[#000000de] text-white overflow-hidden;
 }

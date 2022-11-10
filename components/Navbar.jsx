@@ -102,7 +102,8 @@ const [openModel, setOpenModel] = useState()
       {openModel && (
       <div>
         <Model openBox={setOpenModel}
-        head="Create an account"
+        smallInfo="Create an account"
+        button='Create Acccount'
         image={images.send}
         address={account}
         functionName={createAccounts}

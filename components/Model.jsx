@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Loader } from '../components/Index'
 
-const Model = ({ openBox, head, address, image, functionName, }) => {
+const Model = ({ openBox, button, address, image, functionName, smallInfo}) => {
   const [name, setName] = useState("");
   const [accountAddress, setAccountAddress] = useState("");
   const { loading } = useContext(ChatAppContext);
@@ -20,7 +20,7 @@ const Model = ({ openBox, head, address, image, functionName, }) => {
           <span onClick={() => openBox(false)} className='pl-[90%] cursor-pointer text-black'>
           <AiOutlineClose size={25} />
           </span>
-              <h3 className="text-2xl font-bold">Create Account</h3>
+              <h3 className="text-2xl font-bold">{smallInfo}</h3>
               <form>
                   <div className='my-5'>
                       <label htmlFor='text' className='block uppercase'>Username</label>
@@ -41,7 +41,7 @@ const Model = ({ openBox, head, address, image, functionName, }) => {
                   <button type='submit' onClick={() => functionName({name, accountAddress})} className='bg-black text-lg flex text-white w-full px-6 py-3.5 items-center justify-center  mt-[30px]'>
                     {''}
                     <Image src={image} alt='send' width={30} height={30} />
-                    Create
+                    {button}
                     </button>
               </form>
           </div>
